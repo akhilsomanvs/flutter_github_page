@@ -37,7 +37,7 @@ class SizeConfig {
     _heightMultiplier = _blockSizeVertical;
     _widthMultiplier = _blockSizeHorizontal;
 
-    print("TextSize : $_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
+    print("TextSize :$_screenHeight $_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
   }
 
   static double getVerticalSize(double height) {
