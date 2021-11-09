@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:github_page/utils/arch_utils/utils/ui_utils.dart';
+import 'package:github_page/arch_utils/utils/ui_utils.dart';
 
-import 'sizing_information.dart';
+import '../utils/sizing_information.dart';
 
 class ResponsiveBuilder extends StatelessWidget {
   final Widget Function(BuildContext context, SizingInformation sizingInformation) builder;

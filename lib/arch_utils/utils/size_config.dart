@@ -1,28 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_page/utils/arch_utils/enums/device_screen_type.dart';
-import 'package:github_page/utils/arch_utils/utils/ui_utils.dart';
-
-
-/*
-class SizeConfigUtilInit extends StatelessWidget {
-  // const SizeConfigUtilInit({Key? key}) : super(key: key);
-  SizeConfigUtilInit({
-    required this.builder,
-    this.designSize = const Size(375,812),
-    Key? key,
-  }) : super(key: key);
-
-  final Widget Function() builder;
-
-  /// The [Size] of the device in the design draft, in dp
-  final Size designSize;
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(builder: this.builder);
-  }
-}
-*/
-
+import 'package:github_page/arch_utils/enums/device_screen_type.dart';
+import 'package:github_page/arch_utils/utils/ui_utils.dart';
 
 class SizeConfig {
   static late MediaQueryData _mediaQueryData;
@@ -41,8 +19,7 @@ class SizeConfig {
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     isPortrait = _mediaQueryData.orientation == Orientation.portrait;
-    isMobilePortrait =
-        isPortrait && getDeviceType(_mediaQueryData) == DeviceScreenType.Mobile;
+    isMobilePortrait = isPortrait && getDeviceType(_mediaQueryData) == DeviceScreenType.Mobile;
 
     if (isPortrait) {
       _screenWidth = _mediaQueryData.size.width;
@@ -89,5 +66,29 @@ class SizeConfig {
 
   static double getRightScreenPadding() {
     return _mediaQueryData.padding.right;
+  }
+}
+
+extension SizeConfigExtension on num {
+  double vdp() {
+    var value = this;
+    if (value is double) {
+      return SizeConfig.getVerticalSize(value);
+    } else {
+      return SizeConfig.getVerticalSize(value.toDouble());
+    }
+  }
+
+  double hdp() {
+    var value = this;
+    if (value is double) {
+      return SizeConfig.getHorizontalSize(value);
+    } else {
+      return SizeConfig.getHorizontalSize(value.toDouble());
+    }
+  }
+
+  double sp(){
+    return vdp();
   }
 }

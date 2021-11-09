@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_page/utils/commonUtils/size_config.dart';
+import 'package:github_page/arch_utils/utils/size_config.dart';
 
 class VSpace extends StatelessWidget {
   double height = 0;

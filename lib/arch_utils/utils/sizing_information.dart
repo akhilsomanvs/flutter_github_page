@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_page/utils/arch_utils/enums/device_screen_type.dart';
+import 'package:github_page/arch_utils/enums/device_screen_type.dart';
 
 class SizingInformation {
   final DeviceScreenType deviceScreenType;
@@ -7,8 +7,6 @@ class SizingInformation {
   final Size localWidgetSize;
 
   SizingInformation({/*this.orientation,*/ required this.deviceScreenType, required this.screenSize, required this.localWidgetSize});
-
-//  SizingInformation({this.orientation, this.deviceScreenType, this.screenSize, this.localWidgetSize});
 
   @override
   String toString() {

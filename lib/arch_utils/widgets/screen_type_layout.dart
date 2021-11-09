@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_page/utils/arch_utils/enums/device_screen_type.dart';
+import 'package:github_page/arch_utils/enums/device_screen_type.dart';
 
 import 'responsize_builder.dart';
 
