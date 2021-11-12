@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:github_page/arch_utils/enums/device_screen_type.dart';
 import 'package:github_page/arch_utils/utils/ui_utils.dart';
@@ -16,15 +17,26 @@ class SizeConfig {
   static bool isPortrait = true;
   static bool isMobilePortrait = false;
   static bool isDesktop = false;
+  static final SizeConfig _instance = SizeConfig._internal();
+
+  SizeConfig._internal();
+
+  factory SizeConfig() {
+    return _instance;
+  }
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     isPortrait = _mediaQueryData.orientation == Orientation.portrait;
     isMobilePortrait = isPortrait && getDeviceType(_mediaQueryData) == DeviceScreenType.Mobile;
-    isDesktop = getDeviceType(_mediaQueryData) == DeviceScreenType.Desktop;
+    final isWebMobile = kIsWeb && (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android);
+    isDesktop = !isWebMobile;
     _screenWidth = _mediaQueryData.size.width;
     _screenHeight = _mediaQueryData.size.height;
-
+    if (isDesktop) {
+      _screenWidth = 1300;
+      _screenHeight = 1190;
+    }
     _blockSizeHorizontal = _screenWidth / 100;
     _blockSizeVertical = _screenHeight / 100;
 
@@ -33,7 +45,7 @@ class SizeConfig {
     _heightMultiplier = _blockSizeVertical;
     _widthMultiplier = _blockSizeHorizontal;
 
-    print("TextSize :$_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
+    // print("TextSize :$_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
   }
 
   static double getVerticalSize(double height) {
@@ -44,7 +56,7 @@ class SizeConfig {
   }
 
   static double getHorizontalSize(double width) {
-    if(isDesktop){
+    if (isDesktop) {
       return (width / 3.75) * 12.51;
     }
     return (width / 3.75) * _widthMultiplier;

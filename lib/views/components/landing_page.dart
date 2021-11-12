@@ -249,14 +249,15 @@ class MyDetailsWidget extends StatelessWidget {
                     children: [
                       Text("AKHIL", style: AppTheme.textTheme.headline4.copyWith(fontSize: 48.sp(), color: Colors.white, fontWeight: FontWeight.normal, height: 1)),
                       Text("SOMAN", style: AppTheme.textTheme.headline4.copyWith(fontSize: 48.sp(), color: Colors.white, height: 1)),
-                      VSpace(48),
+                      Expanded(child: SizedBox()),
                       Text("//region ABOUT ME", style: AppTheme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
-                      VSpace(32),
+                      Expanded(child: SizedBox()),
                       Text(
+                        "I am mobile application developer with over 6 years of work experience. 5 Years in Android, 1.5 Years in Flutter."
                         "I am mobile application developer with over 6 years of work experience. 5 Years in Android, 1.5 Years in Flutter.",
                         style: AppTheme.textTheme.bodyText2.copyWith(color: Colors.white),
                       ),
-                      VSpace(32),
+                      Expanded(child: SizedBox()),
                       Text("//endregion ", style: AppTheme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
                     ],
                   ),
