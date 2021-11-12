@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:github_page/app_utils/app_colours.dart';
 import 'package:github_page/app_utils/app_theme.dart';
 import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
+import 'package:github_page/controllers/profile_screen_viewmodel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageMobile extends StatelessWidget {
-  const LandingPageMobile({Key? key}) : super(key: key);
+  LandingPageMobile({Key? key, required this.viewModel}) : super(key: key);
+  ProfileScreenViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,8 @@ class LandingPageMobile extends StatelessWidget {
 }
 
 class LandingPageDesktop extends StatelessWidget {
-  const LandingPageDesktop({Key? key}) : super(key: key);
+  LandingPageDesktop({Key? key, required this.viewModel}) : super(key: key);
+  ProfileScreenViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class LandingPageDesktop extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: MyDetailsWidget(height: height,paddingValue: paddingValue),
+              child: MyDetailsWidget(height: height, paddingValue: paddingValue),
             ),
             Expanded(
               child: ColoredBox(
@@ -48,10 +51,21 @@ class LandingPageDesktop extends StatelessWidget {
           height: 160,
           child: Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("SOME DETAILS ", style: AppTheme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
+              Text("PORTFOLIO ", style: AppTheme.textTheme.headline3.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
             ],
           ),
+        ),
+        GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+
+          ),
+          itemCount: viewModel.projectList.length,
+          itemBuilder: (context, index) {
+            return Card();
+          },
         ),
       ],
     );
