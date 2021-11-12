@@ -23,7 +23,7 @@ class LandingPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = 800;
-    double paddingValue = 60;
+    double paddingValue = 60.vdp();
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -58,13 +58,77 @@ class LandingPageDesktop extends StatelessWidget {
           ),
         ),
         GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-
-          ),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: viewModel.projectList.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 0.9,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
           itemBuilder: (context, index) {
-            return Card();
+            final project = viewModel.projectList[index];
+            return Card(
+              color: colorFooter,
+              elevation: 10,
+              shadowColor: colorMainDark,
+              child: Padding(
+                padding: EdgeInsets.all(16.vdp()),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          project.name,
+                          style: AppTheme.textTheme.headline2.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    VSpace(16),
+                    Text(
+                      project.bulletPoints,
+                      style: AppTheme.textTheme.bodyText1.copyWith(
+                        color: colorGreyText,
+                      ),
+                      maxLines: 3,
+                    ),
+                    VSpace(16),
+                    Expanded(child: Container()),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        onTap: () async {
+                          if (project.gitLink != null && project.gitLink!.isNotEmpty) {
+                            String projectLink = project.gitLink!;
+                            if (await canLaunch(projectLink)) {
+                              await launch(projectLink);
+                            }
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.vdp()),
+                          child: Text(
+                            "Read More >>",
+                            style: AppTheme.textTheme.subtitle2.copyWith(
+                              color: colorMainLight,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
           },
         ),
       ],

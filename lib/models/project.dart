@@ -14,4 +14,21 @@ class ProjectData {
     this.featuresList,
     this.imageAsset,
   });
+
+  String get bulletPoints {
+    String bulletString = "";
+    if (featuresList != null) {
+      for (int i = 0; i < featuresList!.length; i++) {
+        bulletString += "- ${featuresList![i]}";
+        if(i!=featuresList!.length-1){
+          bulletString += "\n";
+        }
+      }
+    }
+    return bulletString;
+  }
+}
+
+enum ProjectType {
+  mobile,
 }

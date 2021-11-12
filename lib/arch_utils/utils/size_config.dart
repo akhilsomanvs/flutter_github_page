@@ -21,13 +21,8 @@ class SizeConfig {
     isPortrait = _mediaQueryData.orientation == Orientation.portrait;
     isMobilePortrait = isPortrait && getDeviceType(_mediaQueryData) == DeviceScreenType.Mobile;
 
-    if (isPortrait) {
-      _screenWidth = _mediaQueryData.size.width;
-      _screenHeight = _mediaQueryData.size.height;
-    } else {
-      _screenWidth = _mediaQueryData.size.height;
-      _screenHeight = _mediaQueryData.size.width;
-    }
+    _screenWidth = _mediaQueryData.size.width;
+    _screenHeight = _mediaQueryData.size.height;
 
     _blockSizeHorizontal = _screenWidth / 100;
     _blockSizeVertical = _screenHeight / 100;
@@ -37,7 +32,7 @@ class SizeConfig {
     _heightMultiplier = _blockSizeVertical;
     _widthMultiplier = _blockSizeHorizontal;
 
-    print("TextSize :$_screenHeight $_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
+    // print("TextSize :$_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
   }
 
   static double getVerticalSize(double height) {
@@ -88,7 +83,7 @@ extension SizeConfigExtension on num {
     }
   }
 
-  double sp(){
+  double sp() {
     return vdp();
   }
 }
