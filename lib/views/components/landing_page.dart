@@ -4,6 +4,7 @@ import 'package:github_page/app_utils/app_colours.dart';
 import 'package:github_page/app_utils/app_theme.dart';
 import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
 import 'package:github_page/controllers/profile_screen_viewmodel.dart';
+import 'package:github_page/models/project.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageMobile extends StatelessWidget {
@@ -22,7 +23,8 @@ class LandingPageDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = 800;
+    double aspectRatio = 3840 / 5760;
+    double height = 600.vdp();
     double paddingValue = 60.vdp();
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -31,15 +33,51 @@ class LandingPageDesktop extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: MyDetailsWidget(height: height, paddingValue: paddingValue),
+              child: AspectRatio(
+                aspectRatio: aspectRatio,
+                child: MyDetailsWidget(height: height, paddingValue: paddingValue),
+              ),
             ),
             Expanded(
-              child: ColoredBox(
-                color: colorMainDark,
+              child: AspectRatio(
+                aspectRatio: aspectRatio,
                 child: SizedBox(
                   height: height,
                   child: ColoredBox(
                     color: colorMainDark,
+                    child: Stack(
+                      children: [
+                        Image.asset("assets/images/my_photo.png"),
+                        Padding(
+                          padding: EdgeInsets.all(8.vdp()),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Skills",
+                                  style: AppTheme.textTheme.bodyText1.copyWith(color: Colors.white),
+                                ),
+                                VSpace(8),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    SkillAvatar(assetImageName: "skill_flutter.png"),
+                                    HSpace(2),
+                                    SkillAvatar(assetImageName: "skill_android.png"),
+                                    HSpace(2),
+                                    SkillAvatar(assetImageName: "skill_kotlin.png"),
+                                    HSpace(2),
+                                    SkillAvatar(assetImageName: "skill_git.png"),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -69,69 +107,96 @@ class LandingPageDesktop extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final project = viewModel.projectList[index];
-            return Card(
-              color: colorFooter,
-              elevation: 10,
-              shadowColor: colorMainDark,
-              child: Padding(
-                padding: EdgeInsets.all(16.vdp()),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          project.name,
-                          style: AppTheme.textTheme.headline2.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    VSpace(16),
-                    Text(
-                      project.bulletPoints,
-                      style: AppTheme.textTheme.bodyText1.copyWith(
-                        color: colorGreyText,
-                      ),
-                      maxLines: 3,
-                    ),
-                    VSpace(16),
-                    Expanded(child: Container()),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: InkWell(
-                        onTap: () async {
-                          if (project.gitLink != null && project.gitLink!.isNotEmpty) {
-                            String projectLink = project.gitLink!;
-                            if (await canLaunch(projectLink)) {
-                              await launch(projectLink);
-                            }
-                          }
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.vdp()),
-                          child: Text(
-                            "Read More >>",
-                            style: AppTheme.textTheme.subtitle2.copyWith(
-                              color: colorMainLight,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return ProjectItem(project: project);
           },
         ),
       ],
+    );
+  }
+}
+
+class SkillAvatar extends StatelessWidget {
+  const SkillAvatar({Key? key, required this.assetImageName}) : super(key: key);
+  final String assetImageName;
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      backgroundColor: Colors.white,
+      radius: 16.vdp(),
+      child: Padding(
+        padding: EdgeInsets.all(6.vdp()),
+        child: Image.asset("assets/images/skills/$assetImageName"),
+      ),
+    );
+  }
+}
+
+class ProjectItem extends StatelessWidget {
+  const ProjectItem({Key? key, required this.project}) : super(key: key);
+  final ProjectData project;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: colorFooter,
+      elevation: 10,
+      shadowColor: colorMainDark,
+      child: Padding(
+        padding: EdgeInsets.all(16.vdp()),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  project.name,
+                  style: AppTheme.textTheme.headline2.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            VSpace(16),
+            Text(
+              project.bulletPoints,
+              style: AppTheme.textTheme.bodyText1.copyWith(
+                color: colorGreyText,
+              ),
+              maxLines: 3,
+            ),
+            VSpace(16),
+            Expanded(child: Container()),
+            Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: () async {
+                  if (project.gitLink != null && project.gitLink!.isNotEmpty) {
+                    String projectLink = project.gitLink!;
+                    if (await canLaunch(projectLink)) {
+                      await launch(projectLink);
+                    }
+                  }
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.vdp()),
+                  child: Text(
+                    "Read More >>",
+                    style: AppTheme.textTheme.subtitle2.copyWith(
+                      color: colorMainLight,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

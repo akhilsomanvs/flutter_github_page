@@ -15,12 +15,13 @@ class SizeConfig {
   static late double _widthMultiplier;
   static bool isPortrait = true;
   static bool isMobilePortrait = false;
+  static bool isDesktop = false;
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     isPortrait = _mediaQueryData.orientation == Orientation.portrait;
     isMobilePortrait = isPortrait && getDeviceType(_mediaQueryData) == DeviceScreenType.Mobile;
-
+    isDesktop = getDeviceType(_mediaQueryData) == DeviceScreenType.Desktop;
     _screenWidth = _mediaQueryData.size.width;
     _screenHeight = _mediaQueryData.size.height;
 
@@ -32,18 +33,27 @@ class SizeConfig {
     _heightMultiplier = _blockSizeVertical;
     _widthMultiplier = _blockSizeHorizontal;
 
-    // print("TextSize :$_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
+    print("TextSize :$_textMultiplier, Height : $_heightMultiplier, Width : $_widthMultiplier");
   }
 
   static double getVerticalSize(double height) {
+    if (isDesktop) {
+      return (height / 8.12) * 11.94;
+    }
     return (height / 8.12) * _heightMultiplier;
   }
 
   static double getHorizontalSize(double width) {
+    if(isDesktop){
+      return (width / 3.75) * 12.51;
+    }
     return (width / 3.75) * _widthMultiplier;
   }
 
   static double getTextSize(double textSize) {
+    if (isDesktop) {
+      return (textSize / 8.12) * 11.94;
+    }
     return (textSize / 8.12) * _textMultiplier;
   }
 
@@ -84,6 +94,11 @@ extension SizeConfigExtension on num {
   }
 
   double sp() {
-    return vdp();
+    var value = this;
+    if (value is double) {
+      return SizeConfig.getTextSize(value);
+    } else {
+      return SizeConfig.getTextSize(value.toDouble());
+    }
   }
 }
