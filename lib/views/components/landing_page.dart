@@ -7,6 +7,7 @@ import 'package:github_page/app_utils/global_methods.dart';
 import 'package:github_page/arch_utils/utils/size_config.dart';
 import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
 import 'package:github_page/controllers/profile_screen_viewmodel.dart';
+import 'package:github_page/views/components/find_me_at_widget.dart';
 import 'package:github_page/views/components/my_details_widget.dart';
 import 'package:github_page/views/components/photo_side_widget.dart';
 import 'package:github_page/views/components/project_item.dart';
@@ -29,7 +30,7 @@ class LandingPageDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double aspectRatio = 3840 / 5760;
+    double aspectRatio = 3840 / 5760; //aspect ratio of the photo I have used.
     double height = 600.vdp();
     double paddingValue = 60.vdp();
     return Column(
@@ -38,6 +39,7 @@ class LandingPageDesktop extends StatelessWidget {
       children: [
         Stack(
           children: [
+            ///Details about me
             Row(
               children: [
                 Expanded(
@@ -54,49 +56,13 @@ class LandingPageDesktop extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned.fill(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Transform.rotate(
-                      angle: -pi / 20,
-                      child: Card(
-                        child: Padding(
-                          padding: EdgeInsets.all(12.vdp()),
-                          child: Text(
-                            "Find me at",
-                            style: AppTheme.textTheme.headline1.copyWith(color: colorMainLight),
-                          ),
-                        ),
-                      ),
-                    ),
-                    VSpace(24),
-                    GestureDetector(
-                        onTap: () async {
-                          launchUrl("https://github.com/akhilsomanvs");
-                        },
-                        child: const SkillAvatar(assetImageName: "contact/contact_github.png")),
-                    VSpace(8),
-                    GestureDetector(
-                        onTap: () async {
-                          launchUrl("https://www.linkedin.com/in/akhil-soman-973769ab/");
-                        },
-                        child: const SkillAvatar(assetImageName: "contact/contact_linkedin.png")),
-                    VSpace(8),
-                    GestureDetector(
-                        onTap: () async {
-                          launchUrl("https://stackoverflow.com/users/5251407/akhil-soman");
-                        },
-                        child: const SkillAvatar(assetImageName: "contact/contact_stackoverflow.png")),
-                  ],
-                ),
-              ),
+            ///Find Me At
+            const Positioned.fill(
+              child: FindMeAtWidget(),
             )
           ],
         ),
+        ///Portfolio Banner
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16.hdp()),
           color: colorFooter,
@@ -112,6 +78,7 @@ class LandingPageDesktop extends StatelessWidget {
             ],
           ),
         ),
+        ///Portfolio Section
         ColoredBox(
           color: Colors.white,
           child: GridView.builder(
