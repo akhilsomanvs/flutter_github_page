@@ -45,6 +45,16 @@ class ProfileScreenViewModel {
         "Custom Painter",
       ],
     ),
+    ProjectData(
+      name: "Flutter Web Portfolio",
+      description: "A portfolio website built using Flutter. The website is not responsive at the moment.",
+      gitLink: "https://github.com/akhilsomanvs/flutter_github_page",
+      imageAsset: "projects/mirrored_loading.gif",
+      featuresList: [
+        "Flutter web",
+        "Non-responsive(At the moment)",
+      ],
+    ),
     /*...List.generate(
       10,
       (index) => ProjectData(
