@@ -1,22 +1,17 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:github_page/app_utils/app_colours.dart';
 import 'package:github_page/app_utils/app_theme.dart';
-import 'package:github_page/app_utils/global_methods.dart';
 import 'package:github_page/arch_utils/utils/size_config.dart';
-import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
 import 'package:github_page/controllers/profile_screen_viewmodel.dart';
 import 'package:github_page/views/components/find_me_at_widget.dart';
 import 'package:github_page/views/components/my_details_widget.dart';
 import 'package:github_page/views/components/photo_side_widget.dart';
 import 'package:github_page/views/components/project_item.dart';
-import 'package:github_page/views/components/skill_avatar.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageMobile extends StatelessWidget {
-  LandingPageMobile({Key? key, required this.viewModel}) : super(key: key);
-  ProfileScreenViewModel viewModel;
+  const LandingPageMobile({Key? key, required this.viewModel}) : super(key: key);
+  final ProfileScreenViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +20,8 @@ class LandingPageMobile extends StatelessWidget {
 }
 
 class LandingPageDesktop extends StatelessWidget {
-  LandingPageDesktop({Key? key, required this.viewModel}) : super(key: key);
-  ProfileScreenViewModel viewModel;
+  const LandingPageDesktop({Key? key, required this.viewModel}) : super(key: key);
+  final ProfileScreenViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {

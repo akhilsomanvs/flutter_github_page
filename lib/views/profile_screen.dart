@@ -37,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                   width: containerWidth,
                   child: Responsive(
                     desktop: LandingPageDesktop(viewModel: viewModel),
-                    mobile: LandingPageMobile(viewModel: viewModel),
+                    mobile: LandingPageDesktop(viewModel: viewModel),
                   ),
                 ),
               ),
