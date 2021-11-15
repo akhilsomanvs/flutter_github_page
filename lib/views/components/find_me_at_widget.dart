@@ -31,23 +31,32 @@ class FindMeAtWidget extends StatelessWidget {
             ),
           ),
           VSpace(24),
-          GestureDetector(
-              onTap: () async {
-                launchUrl("https://github.com/akhilsomanvs");
-              },
-              child: const SkillAvatar(assetImageName: "contact/contact_github.png")),
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+                onTap: () async {
+                  launchUrl("https://github.com/akhilsomanvs");
+                },
+                child: const SkillAvatar(assetImageName: "contact/contact_github.png")),
+          ),
           VSpace(8),
-          GestureDetector(
-              onTap: () async {
-                launchUrl("https://www.linkedin.com/in/akhil-soman-973769ab/");
-              },
-              child: const SkillAvatar(assetImageName: "contact/contact_linkedin.png")),
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+                onTap: () async {
+                  launchUrl("https://www.linkedin.com/in/akhilsomanvs/");
+                },
+                child: const SkillAvatar(assetImageName: "contact/contact_linkedin.png")),
+          ),
           VSpace(8),
-          GestureDetector(
-              onTap: () async {
-                launchUrl("https://stackoverflow.com/users/5251407/akhil-soman");
-              },
-              child: const SkillAvatar(assetImageName: "contact/contact_stackoverflow.png")),
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+                onTap: () async {
+                  launchUrl("https://stackoverflow.com/users/5251407/akhil-soman");
+                },
+                child: const SkillAvatar(assetImageName: "contact/contact_stackoverflow.png")),
+          ),
         ],
       ),
     );

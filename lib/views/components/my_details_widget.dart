@@ -55,7 +55,6 @@ class MyDetailsWidget extends StatelessWidget {
                       Text("//region ABOUT ME", style: AppTheme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
                       Expanded(child: SizedBox()),
                       Text(
-                        "I am mobile application developer with over 6 years of work experience. 5 Years in Android, 1.5 Years in Flutter."
                         "I am mobile application developer with over 6 years of work experience. 5 Years in Android, 1.5 Years in Flutter.",
                         style: AppTheme.textTheme.bodyText2.copyWith(color: Colors.white),
                       ),
