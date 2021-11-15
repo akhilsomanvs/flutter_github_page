@@ -76,20 +76,24 @@ class LandingPageDesktop extends StatelessWidget {
         ///Portfolio Section
         ColoredBox(
           color: Colors.white,
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: viewModel.projectList.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 0.9,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.vdp()),
+            child: GridView.builder(
+              shrinkWrap: true,
+              padding: EdgeInsets.only(bottom: 8.vdp()),
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: viewModel.projectList.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 0.9,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+              ),
+              itemBuilder: (context, index) {
+                final project = viewModel.projectList[index];
+                return ProjectItem(project: project);
+              },
             ),
-            itemBuilder: (context, index) {
-              final project = viewModel.projectList[index];
-              return ProjectItem(project: project);
-            },
           ),
         ),
       ],
