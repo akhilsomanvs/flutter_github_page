@@ -1,11 +1,14 @@
-import 'package:github_page/arch_utils/utils/size_config.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:github_page/app_utils/app_colours.dart';
 import 'package:github_page/app_utils/app_theme.dart';
+import 'package:github_page/app_utils/global_methods.dart';
+import 'package:github_page/arch_utils/utils/size_config.dart';
 import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
 import 'package:github_page/controllers/profile_screen_viewmodel.dart';
-import 'package:github_page/models/project.dart';
 import 'package:github_page/views/components/my_details_widget.dart';
+import 'package:github_page/views/components/photo_side_widget.dart';
 import 'package:github_page/views/components/project_item.dart';
 import 'package:github_page/views/components/skill_avatar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,58 +36,65 @@ class LandingPageDesktop extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
+        Stack(
           children: [
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: aspectRatio,
-                child: MyDetailsWidget(height: height, paddingValue: paddingValue),
-              ),
-            ),
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: aspectRatio,
-                child: SizedBox(
-                  height: height,
-                  child: ColoredBox(
-                    color: colorMainDark,
-                    child: Stack(
-                      children: [
-                        Image.asset("assets/images/my_photo.png"),
-                        Padding(
-                          padding: EdgeInsets.all(8.vdp()),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Skills",
-                                  style: AppTheme.textTheme.bodyText1.copyWith(color: Colors.white),
-                                ),
-                                VSpace(8),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    SkillAvatar(assetImageName: "skill_flutter.png"),
-                                    HSpace(2),
-                                    SkillAvatar(assetImageName: "skill_android.png"),
-                                    HSpace(2),
-                                    SkillAvatar(assetImageName: "skill_kotlin.png"),
-                                    HSpace(2),
-                                    SkillAvatar(assetImageName: "skill_git.png"),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+            Row(
+              children: [
+                Expanded(
+                  child: AspectRatio(
+                    aspectRatio: aspectRatio,
+                    child: MyDetailsWidget(height: height, paddingValue: paddingValue),
                   ),
                 ),
-              ),
+                Expanded(
+                  child: AspectRatio(
+                    aspectRatio: aspectRatio,
+                    child: PhotoSideWidget(height: height),
+                  ),
+                ),
+              ],
             ),
+            Positioned.fill(
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Transform.rotate(
+                      angle: -pi / 20,
+                      child: Card(
+                        child: Padding(
+                          padding: EdgeInsets.all(12.vdp()),
+                          child: Text(
+                            "Find me at",
+                            style: AppTheme.textTheme.headline1.copyWith(color: colorMainLight),
+                          ),
+                        ),
+                      ),
+                    ),
+                    VSpace(24),
+                    GestureDetector(
+                        onTap: () async {
+                          launchUrl("https://github.com/akhilsomanvs");
+                        },
+                        child: const SkillAvatar(assetImageName: "contact/contact_github.png")),
+                    VSpace(8),
+                    GestureDetector(
+                        onTap: () async {
+                          launchUrl("https://www.linkedin.com/in/akhil-soman-973769ab/");
+                        },
+                        child: const SkillAvatar(assetImageName: "contact/contact_linkedin.png")),
+                    VSpace(8),
+                    GestureDetector(
+                        onTap: () async {
+                          launchUrl("https://stackoverflow.com/users/5251407/akhil-soman");
+                        },
+                        child: const SkillAvatar(assetImageName: "contact/contact_stackoverflow.png")),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
         Container(
@@ -96,9 +106,9 @@ class LandingPageDesktop extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(Icons.arrow_downward_rounded,color: Colors.white),
+              const Icon(Icons.arrow_downward_rounded, color: Colors.white),
               Text("PORTFOLIO", style: AppTheme.textTheme.headline3.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
-              const Icon(Icons.arrow_downward_rounded,color: Colors.white),
+              const Icon(Icons.arrow_downward_rounded, color: Colors.white),
             ],
           ),
         ),

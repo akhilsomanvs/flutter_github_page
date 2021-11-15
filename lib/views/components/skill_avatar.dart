@@ -12,7 +12,7 @@ class SkillAvatar extends StatelessWidget {
       radius: 16.vdp(),
       child: Padding(
         padding: EdgeInsets.all(6.vdp()),
-        child: Image.asset("assets/images/skills/$assetImageName"),
+        child: Image.asset("assets/images/$assetImageName"),
       ),
     );
   }

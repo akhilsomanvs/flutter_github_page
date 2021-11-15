@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_page/app_utils/app_colours.dart';
 import 'package:github_page/app_utils/app_theme.dart';
+import 'package:github_page/app_utils/global_methods.dart';
 import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
 import 'package:github_page/models/project.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -52,9 +53,7 @@ class ProjectItem extends StatelessWidget {
                 onTap: () async {
                   if (project.gitLink != null && project.gitLink!.isNotEmpty) {
                     String projectLink = project.gitLink!;
-                    if (await canLaunch(projectLink)) {
-                      await launch(projectLink);
-                    }
+                    launchUrl(projectLink);
                   }
                 },
                 child: Padding(
