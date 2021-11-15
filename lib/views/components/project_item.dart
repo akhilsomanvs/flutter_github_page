@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:github_page/app_utils/app_colours.dart';
 import 'package:github_page/app_utils/app_theme.dart';
 import 'package:github_page/app_utils/global_methods.dart';
+import 'package:github_page/arch_utils/utils/size_config.dart';
 import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
 import 'package:github_page/models/project.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:github_page/arch_utils/utils/size_config.dart';
 
 class ProjectItem extends StatelessWidget {
   const ProjectItem({Key? key, required this.project}) : super(key: key);
@@ -36,6 +35,14 @@ class ProjectItem extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            VSpace(16),
+            Text(
+              project.description,
+              style: AppTheme.textTheme.bodyText1.copyWith(
+                color: colorGreyText,
+              ),
+              maxLines: 3,
             ),
             VSpace(16),
             Text(
