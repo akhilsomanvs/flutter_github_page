@@ -29,12 +29,12 @@ class ProfileScreen extends StatelessWidget {
           if (_usableWidth < containerWidth) {
             containerWidth = _usableWidth;
           }
-          return Padding(
-            padding: EdgeInsets.all(paddingValue),
-            child: Center(
-              child: SizedBox(
-                width: containerWidth,
-                child: SingleChildScrollView(
+          return SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(paddingValue),
+              child: Center(
+                child: SizedBox(
+                  width: containerWidth,
                   child: Responsive(
                     desktop: LandingPageDesktop(viewModel: viewModel),
                     mobile: LandingPageMobile(viewModel: viewModel),

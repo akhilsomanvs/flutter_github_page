@@ -85,30 +85,37 @@ class LandingPageDesktop extends StatelessWidget {
           ],
         ),
         Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.hdp()),
           color: colorFooter,
-          height: 160,
+          height: 100.vdp(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("PORTFOLIO ", style: AppTheme.textTheme.headline3.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
+              const Icon(Icons.arrow_downward_rounded,color: Colors.white),
+              Text("PORTFOLIO", style: AppTheme.textTheme.headline3.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
+              const Icon(Icons.arrow_downward_rounded,color: Colors.white),
             ],
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: viewModel.projectList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 0.9,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
+        ColoredBox(
+          color: Colors.white,
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: viewModel.projectList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.9,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+            ),
+            itemBuilder: (context, index) {
+              final project = viewModel.projectList[index];
+              return ProjectItem(project: project);
+            },
           ),
-          itemBuilder: (context, index) {
-            final project = viewModel.projectList[index];
-            return ProjectItem(project: project);
-          },
         ),
       ],
     );
