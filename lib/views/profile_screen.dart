@@ -5,6 +5,7 @@ import 'package:github_page/arch_utils/widgets/responsive.dart';
 import 'package:github_page/arch_utils/widgets/responsive_safe_area.dart';
 import 'package:github_page/controllers/profile_screen_viewmodel.dart';
 import 'package:github_page/views/components/landing_page.dart';
+import 'package:github_page/views/components/landing_page_mobile.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -22,23 +23,21 @@ class ProfileScreen extends StatelessWidget {
         builder: (BuildContext context, Size size) {
           _usableHeight = size.height;
           _usableWidth = size.width;
-          double paddingValue = 60;
+          double paddingValue = 60;//.vdp();
           debugPrint("WIDTH ::::: $_usableHeight __ $_usableWidth");
 
           double containerWidth = 1250;
           if (_usableWidth < containerWidth) {
             containerWidth = _usableWidth;
           }
+          double aspectRatio = 3840 / 5760; //aspect ratio of the photo I have used.
           return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(paddingValue),
-              child: Center(
-                child: SizedBox(
-                  width: containerWidth,
-                  child: Responsive(
-                    desktop: LandingPageDesktop(viewModel: viewModel),
-                    mobile: LandingPageDesktop(viewModel: viewModel),
-                  ),
+            child: Center(
+              child: SizedBox(
+                width: containerWidth,
+                child: Responsive(
+                  desktop: LandingPageDesktop(viewModel: viewModel,aspectRatio:aspectRatio),
+                  mobile: LandingPageMobile(viewModel: viewModel,aspectRatio:aspectRatio),
                 ),
               ),
             ),
