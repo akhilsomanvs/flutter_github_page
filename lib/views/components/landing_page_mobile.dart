@@ -17,9 +17,9 @@ class LandingPageMobile extends StatelessWidget {
         builder: (context, constraint) {
           double height = constraint.maxWidth / aspectRatio;
           return SizedBox(
-            width: double.infinity,
-            height: height,
-            child: ColoredBox(
+              width: double.infinity,
+              height: height,
+              child: Container() /*ColoredBox(
               color: colorMainLight,
               child: Column(
                 children: [
@@ -55,7 +55,7 @@ class LandingPageMobile extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            )*/,
           );
         },
       ),

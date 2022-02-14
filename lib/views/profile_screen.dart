@@ -23,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
         builder: (BuildContext context, Size size) {
           _usableHeight = size.height;
           _usableWidth = size.width;
-          double paddingValue = 60;//.vdp();
+          double paddingValue = 60; //.vdp();
           debugPrint("WIDTH ::::: $_usableHeight __ $_usableWidth");
 
           double containerWidth = 1250;
@@ -36,8 +36,9 @@ class ProfileScreen extends StatelessWidget {
               child: SizedBox(
                 width: containerWidth,
                 child: Responsive(
-                  desktop: LandingPageDesktop(viewModel: viewModel,aspectRatio:aspectRatio),
-                  mobile: LandingPageMobile(viewModel: viewModel,aspectRatio:aspectRatio),
+                  desktop: LandingPageDesktop(viewModel: viewModel, aspectRatio: aspectRatio, currentWidth: _usableWidth),
+                  tablet: LandingPageMobile(viewModel: viewModel, aspectRatio: aspectRatio),
+                  mobile: LandingPageMobile(viewModel: viewModel, aspectRatio: aspectRatio),
                 ),
               ),
             ),
