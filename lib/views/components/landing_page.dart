@@ -66,7 +66,7 @@ class LandingPageDesktop extends StatelessWidget {
                   ),
 
                   ///Find Me At
-                  const Positioned.fill(
+                  Positioned.fill(
                     child: FindMeAtWidget(),
                   )
                 ],

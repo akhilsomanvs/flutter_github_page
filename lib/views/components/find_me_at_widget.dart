@@ -8,7 +8,14 @@ import 'package:github_page/arch_utils/widgets/spacing_widgets.dart';
 import 'package:github_page/views/components/skill_avatar.dart';
 
 class FindMeAtWidget extends StatelessWidget {
-  const FindMeAtWidget({Key? key}) : super(key: key);
+  FindMeAtWidget({Key? key, this.isVertical = true}) : super(key: key);
+  final bool isVertical;
+
+  final List<_ContactData> dataList = [
+    _ContactData("https://github.com/akhilsomanvs", "contact/contact_github.png"),
+    _ContactData("https://www.linkedin.com/in/akhilsomanvs/", "contact/contact_linkedin.png"),
+    _ContactData("https://stackoverflow.com/users/5251407/akhil-soman", "contact/contact_stackoverflow.png"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,34 +38,56 @@ class FindMeAtWidget extends StatelessWidget {
             ),
           ),
           VSpace(24),
-          MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-                onTap: () async {
-                  launchUrl("https://github.com/akhilsomanvs");
-                },
-                child: const SkillAvatar(assetImageName: "contact/contact_github.png")),
-          ),
-          VSpace(8),
-          MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-                onTap: () async {
-                  launchUrl("https://www.linkedin.com/in/akhilsomanvs/");
-                },
-                child: const SkillAvatar(assetImageName: "contact/contact_linkedin.png")),
-          ),
-          VSpace(8),
-          MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-                onTap: () async {
-                  launchUrl("https://stackoverflow.com/users/5251407/akhil-soman");
-                },
-                child: const SkillAvatar(assetImageName: "contact/contact_stackoverflow.png")),
-          ),
+          _getChildren(),
         ],
       ),
     );
   }
+
+  _getChildren() {
+    List<Widget> childrenList = [];
+    for (var element in dataList) {
+      if (isVertical) {
+        childrenList.add(VSpace(8));
+      } else {
+        childrenList.add(HSpace(8));
+      }
+      childrenList.add(_getSkillAvatar(element.url, element.imageName));
+    }
+    if (!isVertical) {
+      childrenList.add(HSpace(8));
+    }
+
+    if (isVertical) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: childrenList,
+      );
+    } else {
+      return Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: childrenList,
+      );
+    }
+  }
+
+  _getSkillAvatar(String url, String imageName) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+          onTap: () async {
+            launchUrl(url);
+          },
+          child: SkillAvatar(assetImageName: imageName)),
+    );
+  }
+}
+
+class _ContactData {
+  String url;
+  String imageName;
+
+  _ContactData(this.url, this.imageName);
 }
