@@ -53,7 +53,16 @@ class ProjectItem extends StatelessWidget {
               maxLines: 3,
             ),
             VSpace(16),
-            Expanded(child: Container()),
+            Expanded(
+              child: Opacity(
+                opacity: project.imageAsset == null ? 0.0 : 1.0,
+                child: Image.asset(
+                  project.imageAsset != null
+                      ? "assets/images/" + project.imageAsset!
+                      : "",
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: InkWell(

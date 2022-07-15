@@ -10,7 +10,12 @@ import 'package:github_page/views/components/photo_side_widget.dart';
 import 'package:github_page/views/components/project_item.dart';
 
 class LandingPageDesktop extends StatelessWidget {
-  LandingPageDesktop({Key? key, required this.viewModel, required this.aspectRatio, required this.currentWidth}) : super(key: key);
+  LandingPageDesktop(
+      {Key? key,
+      required this.viewModel,
+      required this.aspectRatio,
+      required this.currentWidth})
+      : super(key: key);
   final double currentWidth;
   final ProfileScreenViewModel viewModel;
   final double aspectRatio;
@@ -53,7 +58,8 @@ class LandingPageDesktop extends StatelessWidget {
                       Expanded(
                         child: AspectRatio(
                           aspectRatio: aspectRatio,
-                          child: MyDetailsWidget(height: height, paddingValue: paddingValue),
+                          child: MyDetailsWidget(
+                              height: height, paddingValue: paddingValue),
                         ),
                       ),
                       Expanded(
@@ -82,9 +88,13 @@ class LandingPageDesktop extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(Icons.arrow_downward_rounded, color: Colors.white),
-                    Text("PORTFOLIO", style: AppTheme.textTheme.headline3.copyWith(fontWeight: FontWeight.bold, color: colorGreyText)),
-                    const Icon(Icons.arrow_downward_rounded, color: Colors.white),
+                    const Icon(Icons.arrow_downward_rounded,
+                        color: Colors.white),
+                    Text("PORTFOLIO",
+                        style: AppTheme.textTheme.headline3.copyWith(
+                            fontWeight: FontWeight.bold, color: colorGreyText)),
+                    const Icon(Icons.arrow_downward_rounded,
+                        color: Colors.white),
                   ],
                 ),
               ),
@@ -101,7 +111,7 @@ class LandingPageDesktop extends StatelessWidget {
                     itemCount: viewModel.projectList.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: gridChildCount,
-                      childAspectRatio: 0.9,
+                      childAspectRatio: 0.5,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5,
                     ),
